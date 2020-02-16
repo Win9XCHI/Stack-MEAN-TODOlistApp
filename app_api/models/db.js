@@ -1,14 +1,11 @@
 var mongoose = require( 'mongoose' );
 var readLine = require('readline');
 var gracefulShutdown;
-var dbURI = "mongodb+srv://Admin:mnzuipw62c@cluster0-7a9ru.gcp.mongodb.net/test?retryWrites=true&w=majority";
+var dbURI = 'mongodb://heroku_f57f9l6s:618uh1sr9ku1o3t7h8gb1aao5m@ds037637.mlab.com:37637/heroku_dl5vc9fn';
 
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGODB_URI;
 }
-
-//var dbURI = 'mongodb://localhost/TODOlist';
-//var dbURI = 'mongodb://heroku_f57f9l6s:618uh1sr9ku1o3t7h8gb1aao5m@ds037637.mlab.com:37637/heroku_dl5vc9fn';
 
 mongoose.connect(dbURI);
 

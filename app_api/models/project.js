@@ -1,3 +1,4 @@
+//File with mongoose schems
 var mongoose = require( 'mongoose' );
 
 /* Shemes */
@@ -17,17 +18,3 @@ var ProjectSchema = new mongoose.Schema({
 
 /* Compilation model */
 mongoose.model('Project', ProjectSchema);
-//mongoose.model('Task', TaskSchema);
-
-/*{ 
-    "id": 1,
-    "name": "Clean",
-    "status": "Active",
-    "project_id": 1
-    "task": {
-        "id": 1,
-        "name": "Home"
-    }
-}
-
-*/

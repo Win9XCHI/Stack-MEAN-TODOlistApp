@@ -1,40 +1,42 @@
 extends layout
 
 block content
-  .container.mb-5.pb-5
+   .container.mb-5.pb-5
    .display-3.text-center #{title}
    .display-4.text-center.mb-5 #{description}
    each project in projects
+    .container.SubMain(id=project.id)
         .navbar.navbar-dark.bg-info.shadow-sm(data-id=project.id)
           .container.d-flex.justify-content-between
              a.navbar-brand.d-flex.align-items-center(href='/')
                 i.fas.fa-calendar-week
-                  strong &nbsp; #{project.name}
+                  strong.strong.text-truncate(data-id=project.id) &nbsp; #{project.name}
              div
-               button.navbar-toggler.v1.editProject(type='button', data-toggle="collapse", data-target="#ModalEgitProject", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-id=project.id)
+               button.navbar-toggler.v1.editProject(type='button', data-toggle="modal", data-target="#ModalEditProject", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-id=project.id)
                  i.fas.fa-pen
-               button.navbar-toggler.v1.deleteProject(type="button", data-toggle="collapse", data-target="#ModalDeleteProject", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-id=project.id)
+               button.navbar-toggler.v1.deleteProject(type="button", data-toggle="modal", data-target="#ModalDeleteProject", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-id=project.id)
                   i.fas.fa-dumpster
 
         .navbar.navbar-light.bg-light            
-           i.fas.fa-plus
-           .col-xs-8
-             input.form-control.inpAddTask(type="text", placeholder="Start typing here to create a task")
-           button.btn.btn-outline-success.my-2.my-sm-0.AddTask(type="submit", data-id=project.id) Add task
+           i.fas.fa-plus.col-xs-2
+           .col-xs-4.justify-content-end
+             input.form-control.inpAddTask(type="text", data-id=project.id, placeholder="Start typing here to create a task")
+           button.btn.btn-outline-success.my-2.my-sm-0.col-xs-4.AddTask(type="submit", data-id=project.id) Add task
 
         ul.list-group.mb-5(data-id=project.id)
          each task in project.tasks
-           li.list-group-item(data-id=task.id)
+          if task.status == "A"
+           li.list-group-item(data-id=task.id, data-project-id=project.id)
                .row
                 .col-1
                    i.far.fa-calendar
-                .col-8 #{task.name}
-                .col-1
-                   button.navbar-toggler.v2#checkTask(type="button", data-toggle="collapse", data-target="#navbarHeader", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-project-id=project.id, data-task-id=task.id)
+                .col-10.col-sm-8.text-truncate(data-id=task.id, data-project-id=project.id) #{task.name}
+                .col-2.col-sm-1.justify-content-end
+                   button.navbar-toggler.v2.checkTask(type="button", data-toggle="modal", data-target="#navbarHeader", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-project-id=project.id, data-id=task.id)
                       i.fas.fa-check-circle
-                .col-1
-                   button.navbar-toggler.v2#editTask(type="button", data-toggle="collapse", data-target="#navbarHeader", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-project-id=project.id, data-task-id=task.id)
+                .col-2.col-sm-1.justify-content-end
+                   button.navbar-toggler.v2.editTask(type="button", data-toggle="modal", data-target="#ModalEditTask", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-project-id=project.id, data-id=task.id)
                       i.fas.fa-pencil-alt
-                .col-1
-                   button.navbar-toggler.v2#deleteTask(type="button", data-toggle="collapse", data-target="#navbarHeader", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-project-id=project.id, data-task-id=task.id)
+                .col-2.col-sm-1.justify-content-end
+                   button.navbar-toggler.v2.deleteTask(type="button", data-toggle="modal", data-target="#navbarHeader", aria-controls="navbarHeader", aria-expanded="false", aria-label="Toggle navigation", data-project-id=project.id, data-id=task.id)
                       i.fas.fa-trash-alt    

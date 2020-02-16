@@ -4,8 +4,9 @@ html(ng-app="TODO list")
     meta(name='viewport', content='width=device-width,initial-scale=1.0')
     title= title
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    .container.mb-3#main
+    .container.mb-5.pb-5#main
        block content  
     .container.mb-5.pb-5.text-center
             button.btn.btn-primary.btn-lg(type="button", data-toggle="modal", data-target="#myModal") Add TODO list
@@ -14,7 +15,7 @@ html(ng-app="TODO list")
         .modal-dialog(role="document")
             .modal-content
               .modal-header
-                .modal-title#infoBlock Add new project
+                .modal-title#infoBlockAdd Add new project
                 button.close(type="button", data-dismiss="modal", aria-label="Close")
                   span(aria-hidden="true") &times;
               .modal-body
@@ -23,18 +24,32 @@ html(ng-app="TODO list")
                 button.btn.btn-secondary(type="button", data-dismiss="modal") Close
                 button.btn.btn-primary#AddProject(type="button") Add
                 
-    .modal#ModalEgitProject(tabindex="-1", role="dialog")
+    .modal#ModalEditProject(tabindex="-1", role="dialog")
         .modal-dialog(role="document")
             .modal-content
               .modal-header
-                .modal-title#infoBlock Edit form
+                .modal-title#infoBlockEditProject Edit project form
                 button.close(type="button", data-dismiss="modal", aria-label="Close")
                   span(aria-hidden="true") &times;
               .modal-body
                 input.form-control#NameEditProject(type="text", placeholder="Start typing here to edit a project")
               .modal-footer
                 button.btn.btn-secondary(type="button", data-dismiss="modal") Close
-                button.btn.btn-primary#EditProjectModal(type="button") Edit            
+                button.btn.btn-primary#EditProjectModal(type="button") Edit    
+                
+    .modal#ModalEditTask(tabindex="-1", role="dialog")
+        .modal-dialog(role="document")
+            .modal-content
+              .modal-header
+                .modal-title#infoBlockEditTask Edit task form
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                  span(aria-hidden="true") &times;
+              .modal-body
+                input.form-control#NameEditTask(type="text", placeholder="Start typing here to edit a task")
+              .modal-footer
+                button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+                button.btn.btn-primary#EditTaskModal(type="button") Edit   
+
         
     .footer.text-muted
      .container

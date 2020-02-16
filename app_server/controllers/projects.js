@@ -25,14 +25,19 @@ request(requestOptions, function(err, response, body) {
 });
 
 var renderHomepage = function(req, res, responseBody) {
-    res.render('project-list', { 
-        title: 'Test',
-        description: 'For Ruby Garage',
-        projects: responseBody
-    });
+
+    if (res.statusCode != 200) {
+        _showError(req, res, res.statusCode);
+    } else {    
+        res.render('project-list', { 
+            title: 'Test',
+            description: 'For Ruby Garage',
+            projects: responseBody
+        });
+    }
 };
 
-/* Получить (GET) домашнюю страницу */
+/* Output (GET) home page */
 module.exports.homelist = function (req, res) {
     var requestOptions, path;
     path = 'api/';
