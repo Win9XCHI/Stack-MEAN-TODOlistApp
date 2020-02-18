@@ -14,7 +14,8 @@ Data base tables: project and task
 Tools & Technologies: HTML, Jade, Bootstrap, JavaScript, AJAX, JQuery, Node.js, Express, MongoDB, REST API.
 
 Opportunities for improvement:
-1. User authentication;
-2. Add priority and deadline with able email alert for tasks;
-3. Add history projects and tasks;
-4. Productivity tracking tools.
+1. User authentication (add new table in DB and use JWT standard, LocalStorage);
+2. Add priority and deadline with able email alert for tasks (add new fields in table "task", functions on front-end for movement tasks);
+3. Add history projects and tasks (add new page);
+4. Productivity tracking tools (add new page and calculation functions);
+5. Refactoring front-end on Angular.
