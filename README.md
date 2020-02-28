@@ -19,3 +19,29 @@ Opportunities for improvement:
 3. Add history projects and tasks (add new page);
 4. Productivity tracking tools (add new page and calculation functions);
 5. Refactoring front-end on Angular.
+
+
+SQL query:
+CREATE TABLE projects (
+    id int unique NOT NULL,
+    name varchar(20),
+    primary key (id)
+);
+
+CREATE TABLE tasks (
+    id int unique NOT NULL,
+    name varchar(20),
+    status varchar(1),
+    project_id int,
+    primary key (id),
+    foreign key (project_id) REFERENCES projects(id)
+);
+
+1) SELECT DISTINCT(status) FROM tasks ORDER BY status ASC; 
+2) SELECT project_id, COUNT(*) FROM tasks GROUP BY project_id ORDER BY project_id DESC; 
+3) SELECT projects.name, project_id, COUNT(*) FROM tasks JOIN (projects) ON (tasks.project_id = projects.id) GROUP BY project_id ORDER BY projects.name ASC
+4) SELECT * FROM tasks WHERE name LIKE "N%"; 
+5) SELECT projects.name, IFNULL(COUNT(tasks.id), 0) AS 'Count tasks' FROM projects LEFT JOIN (tasks) ON (tasks.project_id = projects.id) WHERE projects.name LIKE "%a%" GROUP BY projects.name
+6) SELECT * FROM tasks WHERE name IN (SELECT name FROM tasks GROUP BY name HAVING COUNT(*) > 1);
+7) SELECT name, status, COUNT(*) FROM tasks JOIN (projects) ON (tasks.project_id = projects.id) WHERE tasks.name IN (SELECT name FROM tasks GROUP BY name) AND tasks.status IN (SELECT status FROM tasks GROUP BY status) AND projects.name = "Garage" GROUP BY tasks.name, tasks.status HAVING COUNT(*) > 1 ORDER BY COUNT(*) ASC;
+8) SELECT projects.name, COUNT(*) FROM tasks JOIN (projects) ON (tasks.project_id = projects.id) WHERE tasks.status = "F" GROUP BY projects.name HAVING COUNT(*) > 10 ORDER BY tasks.project_id;
